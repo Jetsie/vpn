@@ -1,8 +1,15 @@
 body {
     text-align: center;
-    background-color: SlateGrey;
 }
 .bar{ 
 	width:100%; 
 	height:45px; 
+} 
+
+.darkmain{ 
+    background-color: #1F2023;
+} 
+
+.darksec{ 
+    background-color: #343539;
 } 
