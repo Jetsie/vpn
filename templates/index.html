@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Say Hello</title>
+    <title>Hello</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </head>
@@ -10,6 +10,7 @@
     <div id="tabBar" class="bar darkmain hidden"></div> 
     <div id="urlBar" class="bar darksec hidden"></div> 
     <input id="toggleAppMode" type="button" value="App Mode" onclick="toggle(this);" />
+    
     <!-- page content -->
     <br>
     <form action="greet" method="post">
