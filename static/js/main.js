@@ -1,8 +1,16 @@
 var elem = document.documentElement;
-let tabBar = document.getElementById("tabBar");
-let urlBar = document.getElementById("urlBar");
 
-function EnterApp() {
+function openFullscreen() {
+    if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+    } else if (elem.webkitRequestFullscreen) { /* Safari */
+    elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) { /* IE11 */
+    elem.msRequestFullscreen();
+    }
+}
+
+function closeFullscreen() {
     if (document.exitFullscreen) {
     document.exitFullscreen();
     } else if (document.webkitExitFullscreen) { /* Safari */
@@ -10,18 +18,16 @@ function EnterApp() {
     } else if (document.msExitFullscreen) { /* IE11 */
     document.msExitFullscreen();
     }
+}
+
+function EnterApp() {
+    openFullscreen();
     tabBar.style.display="block";
     urlBar.style.display="block";
 }
 
 function ExitApp() {
-    if (document.exitFullscreen) {
-    document.exitFullscreen();
-    } else if (document.webkitExitFullscreen) { /* Safari */
-    document.webkitExitFullscreen();
-    } else if (document.msExitFullscreen) { /* IE11 */
-    document.msExitFullscreen();
-    }
+    closeFullscreen();
     tabBar.style.display="none";
     urlBar.style.display="none";
 }
@@ -36,5 +42,3 @@ function toggle(button) {
         ExitApp();
     }
 }
-
-ExitApp();
