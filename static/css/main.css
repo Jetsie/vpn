@@ -15,3 +15,7 @@ body {
 .darksec{ 
     background-color: #343539;
 } 
+
+.hidden{
+    display:none;
+}

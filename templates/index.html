@@ -6,52 +6,10 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body>
-    <div id="tabBar" class="bar darkmain"></div> 
-    <div id="urlBar" class="bar darksec"></div> 
+    <div class="bar darkmain hidden"></div> 
+    <div class="bar darksec hidden"></div> 
     <input id="toggleAppMode" type="button" value="App Mode" onclick="toggle(this);" />
-    <script>
-        var elem = document.documentElement;
-        let tabBar = document.getElementById("tabBar");
-        let urlBar = document.getElementById("urlBar");
-        
-        function EnterApp() {
-          if (document.exitFullscreen) {
-            document.exitFullscreen();
-          } else if (document.webkitExitFullscreen) { /* Safari */
-            document.webkitExitFullscreen();
-          } else if (document.msExitFullscreen) { /* IE11 */
-            document.msExitFullscreen();
-          }
-          tabBar.style.display="block";
-          urlBar.style.display="block";
-        }
-
-        function ExitApp() {
-          if (document.exitFullscreen) {
-            document.exitFullscreen();
-          } else if (document.webkitExitFullscreen) { /* Safari */
-            document.webkitExitFullscreen();
-          } else if (document.msExitFullscreen) { /* IE11 */
-            document.msExitFullscreen();
-          }
-          tabBar.style.display="none";
-          urlBar.style.display="none";
-        }
-
-        function toggle(button) {
-            if (button.value == "App Mode") {
-                button.value = "Web Mode";
-                EnterApp();
-                
-            } else {
-                button.value = "App Mode";
-                ExitApp();
-            }
-        }
-
-        ExitApp();
-    </script>
-    
+    <script src="{{ url_for('static', filename='css/main.js') }}"></script>
     <br>
     <form action="greet" method="post">
         {% for message in get_flashed_messages() %}
