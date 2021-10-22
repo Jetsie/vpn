@@ -1,5 +1,5 @@
 from typing import Match
-from flask import Flask, render_template, request, flash
+from flask import Flask, render_template, request, flash, Response
 import requests
 import urllib
 
@@ -20,12 +20,18 @@ def greeter():
 def api():
 	url = request.args.get('url')
 	headers = dict(request.headers)
+	# Edit Host header
 	if headers['Host']:
 		headers['Host'] = urllib.parse.urlparse(url).netloc
-	# flash(url)
+
 	if request.method == 'GET':
 		print(headers)
-		return requests.get(url, headers=headers).content
+		# Get third party page
+		tpr = requests.get(url, headers=headers)
+		# Clone tpr response to our response
+		resp = Response(tpr.content)
+		resp.headers = tpr.headers
+		return resp
 	elif request.method == 'HEAD':
 		user = request.form['nm']
 		return redirect(url_for('success',name = user))
