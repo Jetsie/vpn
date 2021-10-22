@@ -6,7 +6,10 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <link href="{{ url_for('static', filename='css/chrome-tabs.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/chrome-tabs-dark-theme.css') }}" rel="stylesheet">
+
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="https://unpkg.com/draggabilly@2.2.0/dist/draggabilly.pkgd.min.js"></script>
+    <script src="{{ url_for('static', filename='js/chrome-tabs.js') }}"></script>
 </head>
 <body>
     <div id="tabBar" class="bar darkmain hidden">
@@ -62,9 +65,6 @@
               </div>
             </div>
           </div>
-          
-          <script src="https://unpkg.com/draggabilly@2.2.0/dist/draggabilly.pkgd.min.js"></script>
-          <script src="chrome-tabs.js"></script>
           <script>
             var el = document.querySelector('.chrome-tabs')
             var chromeTabs = new ChromeTabs()
