@@ -19,9 +19,9 @@ def greeter():
 @app.route("/api")
 def api():
 	url = request.args.get('url')
-	h = request.headers
-	if h['Host']:
-		h['Host'] = urllib.parse.urlparse(url).netloc
+	headers = request.headers
+	if headers.has_key('Host'):
+		headers.set('Host', urllib.parse.urlparse(url).netloc)
 	# flash(url)
 	if request.method == 'GET':
 		print(h)
