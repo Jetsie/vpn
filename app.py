@@ -25,37 +25,31 @@ def api():
 		headers['Host'] = urllib.parse.urlparse(url).netloc
 
 	if request.method == 'GET':
-		print(headers)
-		# Get third party page
 		tpr = requests.get(url, headers=headers)
-		# Clone tpr response to our response
-		print(tpr.headers)
-		resp = Response(tpr.content)
-		resp.headers = tpr.headers
-		return resp
-	elif request.method == 'HEAD':
-		user = request.form['nm']
-		return redirect(url_for('success',name = user))
-	elif request.method == 'POST':
-		user = request.form['nm']
-		return redirect(url_for('success',name = user))
-	elif request.method == 'PUT':
-		user = request.form['nm']
-		return redirect(url_for('success',name = user))
-	elif request.method == 'DELETE':
-		user = request.form['nm']
-		return redirect(url_for('success',name = user))
-	elif request.method == 'CONNECT':
-		user = request.form['nm']
-		return redirect(url_for('success',name = user))
-	elif request.method == 'OPTIONS':
-		user = request.form['nm']
-		return redirect(url_for('success',name = user))
-	elif request.method == 'TRACE':
-		user = request.form['nm']
-		return redirect(url_for('success',name = user))
-	elif request.method == 'PATCH':
-		user = request.form['nm']
-		return redirect(url_for('success',name = user))
+		return Response(response=tpr.content, headers=headers)
+	# elif request.method == 'HEAD':
+	# 	user = request.form['nm']
+	# 	return redirect(url_for('success',name = user))
+	# elif request.method == 'POST':
+	# 	user = request.form['nm']
+	# 	return redirect(url_for('success',name = user))
+	# elif request.method == 'PUT':
+	# 	user = request.form['nm']
+	# 	return redirect(url_for('success',name = user))
+	# elif request.method == 'DELETE':
+	# 	user = request.form['nm']
+	# 	return redirect(url_for('success',name = user))
+	# elif request.method == 'CONNECT':
+	# 	user = request.form['nm']
+	# 	return redirect(url_for('success',name = user))
+	# elif request.method == 'OPTIONS':
+	# 	user = request.form['nm']
+	# 	return redirect(url_for('success',name = user))
+	# elif request.method == 'TRACE':
+	# 	user = request.form['nm']
+	# 	return redirect(url_for('success',name = user))
+	# elif request.method == 'PATCH':
+	# 	user = request.form['nm']
+	# 	return redirect(url_for('success',name = user))
 	
 	
