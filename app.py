@@ -20,8 +20,8 @@ def greeter():
 def api():
 	url = request.args.get('url')
 	headers = dict(request.headers)
-	if headers.has_key('Host'):
-		headers.set('Host', urllib.parse.urlparse(url).netloc)
+	if headers['Host']:
+		headers['Host'] = urllib.parse.urlparse(url).netloc
 	# flash(url)
 	if request.method == 'GET':
 		print(h)
