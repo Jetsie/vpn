@@ -29,6 +29,7 @@ def api():
 		# Get third party page
 		tpr = requests.get(url, headers=headers)
 		# Clone tpr response to our response
+		print(tpr.headers)
 		resp = Response(tpr.content)
 		resp.headers = tpr.headers
 		return resp
