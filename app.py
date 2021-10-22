@@ -26,6 +26,7 @@ def api():
 
 	if request.method == 'GET':
 		tpr = requests.get(url, headers=headers)
+		print(tpr.content)
 		return Response(response=tpr.content, headers=headers)
 	# elif request.method == 'HEAD':
 	# 	user = request.form['nm']
