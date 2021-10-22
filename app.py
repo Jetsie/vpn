@@ -18,10 +18,9 @@ def greeter():
 @app.route("/api")
 def api():
 	url = request.args.get('url')
-	print(request)
-	flash(url)
+	# flash(url)
 	if request.method == 'GET':
-		return requests.get(url, headers=request.headers).content
+		return requests.get(url).content
 	elif request.method == 'HEAD':
 		user = request.form['nm']
 		return redirect(url_for('success',name = user))
