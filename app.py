@@ -20,6 +20,7 @@ def api():
 	url = request.args.get('url')
 	# flash(url)
 	if request.method == 'GET':
+		print(request.headers)
 		return requests.get(url).content
 	elif request.method == 'HEAD':
 		user = request.form['nm']
