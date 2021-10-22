@@ -24,8 +24,8 @@ def api():
 		headers['Host'] = urllib.parse.urlparse(url).netloc
 	# flash(url)
 	if request.method == 'GET':
-		print(h)
-		return requests.get(url, headers=h).content
+		print(headers)
+		return requests.get(url, headers=headers).content
 	elif request.method == 'HEAD':
 		user = request.form['nm']
 		return redirect(url_for('success',name = user))
