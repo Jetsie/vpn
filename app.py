@@ -1,5 +1,5 @@
 from typing import Match
-from flask import Flask, render_template, request, flash, Response
+from flask import Flask, render_template, request, flash, make_response
 import requests
 import urllib
 
@@ -27,7 +27,7 @@ def api():
 	if request.method == 'GET':
 		tpr = requests.get(url, headers=headers)
 		print(tpr.content)
-		return Response(response=tpr.content, headers=headers)
+		return make_response((tpr.content, tpr.status, tpr.headers))
 	# elif request.method == 'HEAD':
 	# 	user = request.form['nm']
 	# 	return redirect(url_for('success',name = user))
