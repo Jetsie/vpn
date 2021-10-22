@@ -1,6 +1,7 @@
 from typing import Match
 from flask import Flask, render_template, request, flash
 import requests
+import urllib
 
 app = Flask(__name__)
 app.secret_key = "manbearpig_MUDMAN888"
@@ -18,9 +19,12 @@ def greeter():
 @app.route("/api")
 def api():
 	url = request.args.get('url')
+	headers = request.headers
+	if headers['Host']:
+		headers['Host'] = urllib.parse.urlparse(url).netloc
 	# flash(url)
 	if request.method == 'GET':
-		print(request.headers)
+		print(headers)
 		return requests.get(url).content
 	elif request.method == 'HEAD':
 		user = request.form['nm']
