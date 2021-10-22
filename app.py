@@ -1,6 +1,6 @@
 from typing import Match
 from flask import Flask, render_template, request, flash
-from requests import get
+import requests
 
 app = Flask(__name__)
 app.secret_key = "manbearpig_MUDMAN888"
@@ -17,35 +17,34 @@ def greeter():
 
 @app.route("/api")
 def api():
-	return get(f'https://google.com/').content
-	# url = request.args.get('url')
-	# flash(url)
-	# if request.method == 'GET':
-    # 	user = request.form['nm']
-    # 	return redirect(url_for('success',name = user))
-	# elif request.method == 'HEAD':
-	# 	user = request.form['nm']
-	# 	return redirect(url_for('success',name = user))
-	# elif request.method == 'POST':
-	# 	user = request.form['nm']
-	# 	return redirect(url_for('success',name = user))
-	# elif request.method == 'PUT':
-	# 	user = request.form['nm']
-	# 	return redirect(url_for('success',name = user))
-	# elif request.method == 'DELETE':
-	# 	user = request.form['nm']
-	# 	return redirect(url_for('success',name = user))
-	# elif request.method == 'CONNECT':
-	# 	user = request.form['nm']
-	# 	return redirect(url_for('success',name = user))
-	# elif request.method == 'OPTIONS':
-	# 	user = request.form['nm']
-	# 	return redirect(url_for('success',name = user))
-	# elif request.method == 'TRACE':
-	# 	user = request.form['nm']
-	# 	return redirect(url_for('success',name = user))
-	# elif request.method == 'PATCH':
-	# 	user = request.form['nm']
-	# 	return redirect(url_for('success',name = user))
+	url = request.args.get('url')
+	print(request)
+	flash(url)
+	if request.method == 'GET':
+		return requests.get(url, headers=request.headers).content
+	elif request.method == 'HEAD':
+		user = request.form['nm']
+		return redirect(url_for('success',name = user))
+	elif request.method == 'POST':
+		user = request.form['nm']
+		return redirect(url_for('success',name = user))
+	elif request.method == 'PUT':
+		user = request.form['nm']
+		return redirect(url_for('success',name = user))
+	elif request.method == 'DELETE':
+		user = request.form['nm']
+		return redirect(url_for('success',name = user))
+	elif request.method == 'CONNECT':
+		user = request.form['nm']
+		return redirect(url_for('success',name = user))
+	elif request.method == 'OPTIONS':
+		user = request.form['nm']
+		return redirect(url_for('success',name = user))
+	elif request.method == 'TRACE':
+		user = request.form['nm']
+		return redirect(url_for('success',name = user))
+	elif request.method == 'PATCH':
+		user = request.form['nm']
+		return redirect(url_for('success',name = user))
 	
 	
