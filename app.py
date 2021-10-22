@@ -19,7 +19,7 @@ def greeter():
 @app.route("/api")
 def api():
 	url = request.args.get('url')
-	headers = request.headers
+	headers = dict(request.headers)
 	if headers.has_key('Host'):
 		headers.set('Host', urllib.parse.urlparse(url).netloc)
 	# flash(url)
