@@ -27,7 +27,7 @@ def api():
 	if request.method == 'GET':
 		tpr = requests.get(url, headers=headers)
 		print(tpr.content)
-		return make_response((tpr.content, tpr.status, tpr.headers))
+		return make_response((tpr.content, tpr.status_code, tpr.headers))
 	# elif request.method == 'HEAD':
 	# 	user = request.form['nm']
 	# 	return redirect(url_for('success',name = user))
