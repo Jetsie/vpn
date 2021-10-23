@@ -57,13 +57,12 @@ def api():
 		headers['Host'] = urllib.urlparse(url).netloc
 
 	if request.method == 'GET':
-		session = requests.Session()
-		session.max_redirects = 600
-		tpr = session.get(url, headers=headers)
+		print(url)
+		tpr = requests.get(url, headers=headers)
 		content = proxyHTML(tpr.content, urllib.urlparse(url).netloc)
 		print(content)
 		
-		return make_response((content, tpr.status_code, dict(tpr.headers)))
+		return make_response((tpr.content, tpr.status_code, dict(tpr.headers)))
 	# elif request.method == 'HEAD':
 	# 	user = request.form['nm']
 	# 	return redirect(url_for('success',name = user))
