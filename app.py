@@ -58,10 +58,12 @@ def api():
 
 	if request.method == 'GET':
 		tpr = requests.get(url, headers=headers)
-		if tpr.text.startswith('<'):
+		if tpr.content.startswith('<'):
 			content = proxyHTML(tpr.content, urllib.urlparse(url).netloc)
+			print(f'Yeah HTML: {content}')
 		else:
 			content = tpr.content
+			print(f'Not HTML: {content}')
 		
 		return make_response((content, tpr.status_code, dict(tpr.headers)))
 	# elif request.method == 'HEAD':
