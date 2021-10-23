@@ -1,1 +1,3 @@
-import requests
+import brotli
+
+brotli.decompress(tpr.content)
