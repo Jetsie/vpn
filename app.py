@@ -58,7 +58,7 @@ def api():
 
 	if request.method == 'GET':
 		tpr = requests.get(url, headers=headers)
-		if tpr.content.startswith('<'):
+		if tpr.text.startswith('<'):
 			content = proxyHTML(tpr.content, urllib.urlparse(url).netloc)
 		else:
 			content = tpr.content
