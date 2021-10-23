@@ -58,8 +58,8 @@ def api():
 
 	if request.method == 'GET':
 		tpr = requests.get(url, headers=headers)
-		content = proxyHTML(tpr.content, urllib.urlparse(url).netloc)
-		print(headers)
+		content = proxyHTML(tpr.text, urllib.urlparse(url).netloc)
+		print(tpr.text)
 		
 		return make_response((tpr.content, tpr.status_code, dict(tpr.headers)))
 	# elif request.method == 'HEAD':
