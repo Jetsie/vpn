@@ -63,7 +63,7 @@ def api():
 			print(f'Yeah HTML: {content}')
 		else:
 			content = tpr.content
-			print(headers)
+			print(dict(tpr.headers))
 			print(tpr.encoding)
 		
 		return make_response((content, tpr.status_code, dict(tpr.headers)))
