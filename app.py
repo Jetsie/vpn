@@ -58,7 +58,7 @@ def api():
 
 	if request.method == 'GET':
 		session = requests.Session()
-		session.max_redirects = 60
+		session.max_redirects = 600
 		tpr = session.get(url, headers=headers)
 		content = proxyHTML(tpr.content, urllib.urlparse(url).netloc)
 		print(content)
