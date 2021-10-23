@@ -26,7 +26,7 @@ def urlToApi(url, base):
     elif url.startswith('{{') and url.endswith('}}'):
         return url
     else:
-        return f'https://radford.herokuapp.com/api?url={urljoin(base, url)}'
+        return f'https://radford.herokuapp.com/api?url={urllib.urljoin(base, url)}'
 
 def find_list_resources (tag, attribute, soup, domain):
    for x in soup.findAll(tag):
@@ -62,7 +62,7 @@ def api():
 	if request.method == 'GET':
 		tpr = requests.get(url, headers=headers)
 		encodings = dict(tpr.headers)['Content-Encoding'].strip(' ').split(',')
-		print(tpr.content)
+		# print(tpr.content)
 		content = proxyHTML(tpr.content, urllib.urlparse(url).netloc)
 		
 		return make_response((content, tpr.status_code, dict(tpr.headers)))
