@@ -57,7 +57,9 @@ def api():
 		headers['Host'] = urllib.urlparse(url).netloc
 
 	if request.method == 'GET':
-		tpr = requests.get(url, headers=headers, max_redirects=60)
+		session = requests.Session()
+		session.max_redirects = 60
+		tpr = session.get(url, headers=headers)
 		content = proxyHTML(tpr.content, urllib.urlparse(url).netloc)
 		print(content)
 		
