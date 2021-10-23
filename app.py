@@ -64,7 +64,7 @@ def api():
 		encodings = dict(tpr.headers)['Content-Encoding'].strip(' ').split(',')
 		for encoding in encodings:
 			if encoding == 'br':
-				content =  brotli.compress(proxyHTML(brotli.decompress(tpr.content), urllib.urlparse(url).netloc))
+				content =  brotli.compress(proxyHTML(brotli.decompress(tpr.text), urllib.urlparse(url).netloc))
 			elif encoding == 'gzip':
 				content =  gzip.compress(proxyHTML(gzip.decompress(tpr.content), urllib.urlparse(url).netloc))
 			elif encoding == 'deflate':
