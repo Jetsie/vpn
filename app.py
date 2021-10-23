@@ -58,10 +58,12 @@ def api():
 
 	if request.method == 'GET':
 		tpr = requests.get(url, headers=headers)
-		content = proxyHTML(tpr.text, urllib.urlparse(url).netloc)
-		print(tpr.text)
+		if tpr.content.startswith('<'):
+			content = proxyHTML(tpr.content, urllib.urlparse(url).netloc)
+		else:
+			content = tpr.content
 		
-		return make_response((tpr.content, tpr.status_code, dict(tpr.headers)))
+		return make_response((content, tpr.status_code, dict(tpr.headers)))
 	# elif request.method == 'HEAD':
 	# 	user = request.form['nm']
 	# 	return redirect(url_for('success',name = user))
