@@ -64,7 +64,7 @@ def api():
 		encodings = dict(tpr.headers)['Content-Encoding'].strip(' ').split(',')
 		# print(tpr.content)
 		content = proxyHTML(tpr.content, urllib.urlparse(url).netloc)
-		
+		print(type(content))		
 		return Response(response=content, status=tpr.status_code, headers=dict(tpr.headers))
 	# elif request.method == 'HEAD':
 	# 	user = request.form['nm']
