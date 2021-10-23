@@ -7,8 +7,6 @@ from bs4 import BeautifulSoup
 app = Flask(__name__)
 app.secret_key = "manbearpig_MUDMAN888"
 
-print(make_response(('tpr.content', 200, dict(None))))
-
 @app.route("/")
 def index():
 	flash("what's your name?")
@@ -63,7 +61,6 @@ def api():
 		encodings = dict(tpr.headers)['Content-Encoding'].strip(' ').split(',')
 		# print(tpr.content)
 		content = proxyHTML(tpr.content, urllib.urlparse(url).netloc)
-		print(content)
 		
 		return make_response((tpr.content, tpr.status_code, dict(tpr.headers)))
 	# elif request.method == 'HEAD':
