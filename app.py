@@ -34,7 +34,7 @@ def find_list_resources (tag, attribute, soup, domain):
    return(soup)
 
 def proxyHTML(html, domain):
-    soup = BeautifulSoup(html)
+    soup = BeautifulSoup(html, features="html.parser")
 
     soup = find_list_resources('img', "src", soup, domain)
     soup = find_list_resources('script', "src", soup, domain)
@@ -60,7 +60,7 @@ def api():
 		print(url) 
 		tpr = requests.get(url, headers=headers)
 		content = proxyHTML(tpr.content, urllib.urlparse(url).netloc)
-		print(tpr.content.decode())
+		print(tpr.content.decode(tpr.encoding))
 		
 		return make_response((tpr.content, tpr.status_code, dict(tpr.headers)))
 	# elif request.method == 'HEAD':
