@@ -3,12 +3,11 @@ from flask import Flask, render_template, request, flash, make_response
 import requests
 import urllib.parse as urllib
 from bs4 import BeautifulSoup
-import brotli
-import gzip
-import zlib
 
 app = Flask(__name__)
 app.secret_key = "manbearpig_MUDMAN888"
+
+print(make_response(('tpr.content', 200, dict(None))))
 
 @app.route("/")
 def index():
