@@ -62,7 +62,7 @@ def api():
 	if request.method == 'GET':
 		tpr = requests.get(url, headers=headers)
 		encodings = dict(tpr.headers)['Content-Encoding'].strip(' ').split(',')
-		print(content)
+		print(tpr.content)
 		content = proxyHTML(tpr.content, urllib.urlparse(url).netloc)
 		
 		return make_response((content, tpr.status_code, dict(tpr.headers)))
