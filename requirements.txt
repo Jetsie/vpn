@@ -11,3 +11,5 @@ requests
 urllib3
 bs4
 brotli
+gzip
+zlib
