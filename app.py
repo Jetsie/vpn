@@ -66,7 +66,7 @@ def api():
 		content = proxyHTML(tpr.content, urllib.urlparse(url).netloc)
 		print(content)
 		
-		return make_response((content, tpr.status_code, dict(tpr.headers)))
+		return make_response(('Hello World', tpr.status_code, dict(tpr.headers)))
 	# elif request.method == 'HEAD':
 	# 	user = request.form['nm']
 	# 	return redirect(url_for('success',name = user))
