@@ -62,16 +62,8 @@ def api():
 	if request.method == 'GET':
 		tpr = requests.get(url, headers=headers)
 		encodings = dict(tpr.headers)['Content-Encoding'].strip(' ').split(',')
-		for encoding in encodings:
-			print(tpr.content)
-			if encoding == 'br':
-				content =  brotli.compress(proxyHTML(brotli.decompress(tpr.content), urllib.urlparse(url).netloc))
-			elif encoding == 'gzip':
-				content =  gzip.compress(proxyHTML(gzip.decompress(tpr.content), urllib.urlparse(url).netloc))
-			elif encoding == 'deflate':
-				content =  zlib.compress(proxyHTML(zlib.decompress(tpr.content), urllib.urlparse(url).netloc))
-			else:
-				content = proxyHTML(tpr.content, urllib.urlparse(url).netloc)
+		print(content)
+		content = proxyHTML(tpr.content, urllib.urlparse(url).netloc)
 		
 		return make_response((content, tpr.status_code, dict(tpr.headers)))
 	# elif request.method == 'HEAD':
