@@ -64,6 +64,7 @@ def api():
 		encodings = dict(tpr.headers)['Content-Encoding'].strip(' ').split(',')
 		# print(tpr.content)
 		content = proxyHTML(tpr.content, urllib.urlparse(url).netloc)
+		print(content)
 		
 		return make_response((content, tpr.status_code, dict(tpr.headers)))
 	# elif request.method == 'HEAD':
