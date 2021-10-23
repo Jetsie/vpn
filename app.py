@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, flash, make_response
 import requests
 import urllib.parse as urllib
 from bs4 import BeautifulSoup
+import brotli
 
 app = Flask(__name__)
 app.secret_key = "manbearpig_MUDMAN888"
@@ -58,13 +59,12 @@ def api():
 
 	if request.method == 'GET':
 		tpr = requests.get(url, headers=headers)
-		if tpr.text.startswith('<'):
-			content = proxyHTML(tpr.text, urllib.urlparse(url).netloc)
-			print(f'Yeah HTML: {content}')
-		else:
-			content = tpr.content
-			print(dict(tpr.headers))
-			print(tpr.encoding)
+		encoding = dict(tpr.headers)['Content-Encoding']
+		print(encoding)
+		# brotli.decompress(response.content)
+		# content = proxyHTML(tpr.text, urllib.urlparse(url).netloc)
+		# print(f'Yeah HTML: {content}')
+		content = tpr.content
 		
 		return make_response((content, tpr.status_code, dict(tpr.headers)))
 	# elif request.method == 'HEAD':

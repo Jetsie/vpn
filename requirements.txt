@@ -10,3 +10,4 @@ wincertstore==0.2
 requests
 urllib3
 bs4
+brotli
