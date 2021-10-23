@@ -21,7 +21,7 @@ def greeter():
 	return render_template("index.html")
 
 def urlToApi(url, base):
-    if bool(urlparse(url).netloc):
+    if bool(urllib.urlparse(url).netloc):
         return f'https://radford.herokuapp.com/api?url={url}'
     elif url.startswith('{{') and url.endswith('}}'):
         return url
