@@ -63,7 +63,8 @@ def api():
 			print(f'Yeah HTML: {content}')
 		else:
 			content = tpr.content
-			print(f'Not HTML: {content}')
+			print(headers)
+			print(tpr.encoding)
 		
 		return make_response((content, tpr.status_code, dict(tpr.headers)))
 	# elif request.method == 'HEAD':
