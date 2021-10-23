@@ -1,5 +1,5 @@
 from typing import Match
-from flask import Flask, render_template, request, flash, Response
+from flask import Flask, render_template, request, flash, make_response
 import requests
 import urllib.parse as urllib
 from bs4 import BeautifulSoup
@@ -49,7 +49,7 @@ def proxyHTML(html, domain):
     soup = find_list_resources("object", "data", soup, domain)
     soup = find_list_resources("source", "src", soup, domain)
 
-    return soup
+    return str(soup)
 
 @app.route("/api")
 def api():
@@ -64,8 +64,9 @@ def api():
 		encodings = dict(tpr.headers)['Content-Encoding'].strip(' ').split(',')
 		# print(tpr.content)
 		content = proxyHTML(tpr.content, urllib.urlparse(url).netloc)
-		print(type(content))		
-		return Response(response=content, status=tpr.status_code, headers=dict(tpr.headers))
+		print(type(content))
+		
+		return make_response((content, tpr.status_code, dict(tpr.headers)))
 	# elif request.method == 'HEAD':
 	# 	user = request.form['nm']
 	# 	return redirect(url_for('success',name = user))
