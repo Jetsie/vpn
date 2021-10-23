@@ -54,11 +54,11 @@ def api():
 	headers = dict(request.headers)
 	# Edit Host header
 	if headers['Host']:
-		headers['Host'] = urllib.parse.urlparse(url).netloc
+		headers['Host'] = urllib.urlparse(url).netloc
 
 	if request.method == 'GET':
 		tpr = requests.get(url, headers=headers)
-		content = proxyHTML(tpr.content)
+		content = proxyHTML(tpr.content, urllib.urlparse(url).netloc)
 		
 		return make_response((content, tpr.status_code, dict(tpr.headers)))
 	# elif request.method == 'HEAD':
