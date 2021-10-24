@@ -17,6 +17,14 @@ def greeter():
 	flash("Hi " + str(request.form['name_input']) + ", great to see you!")
 	return render_template("index.html")
 
+@app.route("/test")
+def test():
+	flash("Hi " + str(request.form['name_input']) + ", great to see you!")
+	response = make_response(('<html><head><title>testing</title></head><body><h1>testing 123</h1></body></html', 200))
+	print(type(response))
+	print(response.get_data())
+	return response
+
 def urlToApi(url, base):
     if bool(urllib.urlparse(url).netloc):
         return f'https://radford.herokuapp.com/api?url={url}'
