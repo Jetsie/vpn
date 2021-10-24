@@ -17,13 +17,6 @@ def greeter():
 	flash("Hi " + str(request.form['name_input']) + ", great to see you!")
 	return render_template("index.html")
 
-@app.route("/test")
-def test():
-	response = make_response(('<html><head><title>testing</title></head><body><h1>testing 123</h1></body></html', 200))
-	print(type(response))
-	print(response.get_data())
-	return response
-
 def urlToApi(url, base):
     if bool(urllib.urlparse(url).netloc):
         return f'https://radford.herokuapp.com/api?url={url}'
@@ -67,10 +60,8 @@ def api():
 		tpr = requests.get(url, headers=headers)
 		# encodings = dict(tpr.headers)['Content-Encoding'].strip(' ').split(',')
 		# print(tpr.content)
-		# content = proxyHTML(tpr.content, urllib.urlparse(url).netloc)
-		response = make_response((tpr.content, tpr.status_code, dict(tpr.headers)))
-		print(type(response))
-		print(response.get_data())
+		content = proxyHTML(tpr.content, urllib.urlparse(url).netloc)
+		response = make_response((content, tpr.status_code))
 		return response
 	# elif request.method == 'HEAD':
 	# 	user = request.form['nm']
