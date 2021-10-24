@@ -58,9 +58,9 @@ def api():
 
 	if request.method == 'GET':
 		tpr = requests.get(url, headers=headers)
-		encodings = dict(tpr.headers)['Content-Encoding'].strip(' ').split(',')
+		# encodings = dict(tpr.headers)['Content-Encoding'].strip(' ').split(',')
 		# print(tpr.content)
-		content = proxyHTML(tpr.content, urllib.urlparse(url).netloc)
+		# content = proxyHTML(tpr.content, urllib.urlparse(url).netloc)
 		
 		return make_response((tpr.content, tpr.status_code, dict(tpr.headers)))
 	# elif request.method == 'HEAD':
