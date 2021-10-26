@@ -26,7 +26,7 @@ def urlToApi(url, base, scheme):
         return url
     else:
         link = '/' if not url.startswith('/') else ''
-        return f'https://radford.herokuapp.com/api?url={scheme}s{base}{link}{url}'
+        return f'https://radford.herokuapp.com/api?url={scheme}://{base}{link}{url}'
         
 
 def find_list_resources (tag, attribute, soup, domain, scheme):
