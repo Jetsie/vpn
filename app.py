@@ -20,13 +20,13 @@ def greeter():
 def urlToApi(url, base):
     if bool(urllib.urlparse(url).netloc):
         return f'https://radford.herokuapp.com/api?url={url}'
-        print(url)
     elif url.startswith('{{') and url.endswith('}}'):
         return url
     elif url.startswith('data:'):
         return url
     else:
         return f'https://radford.herokuapp.com/api?url={urllib.urljoin(base, url)}'
+        print(base, url)
 
 def find_list_resources (tag, attribute, soup, domain):
    for x in soup.findAll(tag):
