@@ -26,7 +26,7 @@ def urlToApi(url, base):
         return url
     else:
         print(urllib.urljoin(base, url))
-        return f'https://radford.herokuapp.com/api?url={}'
+        return f'https://radford.herokuapp.com/api?url={urllib.urljoin(base, url)}'
         
 
 def find_list_resources (tag, attribute, soup, domain):
