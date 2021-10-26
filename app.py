@@ -57,7 +57,10 @@ def api():
 		headers['Host'] = urllib.urlparse(url).netloc
 
 	if request.method == 'GET':
-		tpr = requests.get(url, headers=headers)
+		try:
+			tpr = requests.get(url, headers=headers)
+		except:
+			abort(404)
 		# encodings = dict(tpr.headers)['Content-Encoding'].strip(' ').split(',')
 		# print(tpr.content)
 		content = proxyHTML(tpr.content, urllib.urlparse(url).netloc)
