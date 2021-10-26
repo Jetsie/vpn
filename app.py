@@ -25,7 +25,7 @@ def urlToApi(url, base):
     elif url.startswith('data:'):
         return url
     else:
-        print(urllib.urljoin(base, url))
+        print(f'https://radford.herokuapp.com/api?url={base}{'/' if not url.startswith('/') else ''}{url})}')
         return f'https://radford.herokuapp.com/api?url={base}{'/' if not url.startswith('/') else ''}{url})}'
         
 
