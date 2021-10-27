@@ -84,7 +84,7 @@ def api():
             tpr = requests.post(url, data=request.data, cookies=cookies, headers=headers)
         except Exception as e:
             abort(404, str(e))
-        resp = make_response((tpr.content, tpr.status_code))
+        resp = make_response((tpr.content, tpr.status_code, tpr.headers))
         for cookie in tpr.cookies.keys():
             resp.set_cookie(cookie, tpr.cookies[cookie])
     # elif request.method == 'PUT':
