@@ -77,8 +77,8 @@ def api():
                 raise KeyError
         except KeyError:
             content = proxyHTML(tpr.content, urlparse.netloc, urlparse.scheme)
-        print(str(type(tpr.headers)), '->' ,tpr.headers)
-        resp = make_response((content, tpr.status_code, tpr.headers))
+        print(str(type(tpr.headers)), '->' , tpr.headers)
+        resp = make_response((content, tpr.status_code, dict(tpr.headers)))
         
         for cookie in tpr.cookies.keys():
             resp.set_cookie(cookie, tpr.cookies[cookie])
