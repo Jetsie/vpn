@@ -12,11 +12,6 @@ def index():
     flash("what's your name?")
     return render_template("index.html")
 
-@app.route("/greet", methods=['POST', 'GET'])
-def greeter():
-    flash("Hi " + str(request.form['name_input']) + ", great to see you!")
-    return render_template("index.html")
-
 def urlToApi(url, base, scheme):
     if bool(urllib.urlparse(url).netloc):
         return f'https://radford.herokuapp.com/api?url={url}'
@@ -27,7 +22,6 @@ def urlToApi(url, base, scheme):
     else:
         link = '/' if not url.startswith('/') else ''
         return f'https://radford.herokuapp.com/api?url={scheme}://{base}{link}{url}'
-        
 
 def find_list_resources (tag, attribute, soup, domain, scheme):
    for x in soup.findAll(tag):
@@ -57,26 +51,39 @@ def api():
     url = request.args.get('url')
     urlparse = urllib.urlparse(url)
     headers = dict(request.headers)
+    cookies = dict(request.cookies)
+    
     # Edit Host header
     if headers['Host']:
         headers['Host'] = urlparse.netloc
 
     if request.method == 'GET':
+        # Make request on behalf of client.
         try:
-            tpr = requests.get(url, headers=headers)
-        except:
-            abort(404)
-        # encodings = dict(tpr.headers)['Content-Encoding'].strip(' ').split(',')
-        # print(tpr.content)
-        content = proxyHTML(tpr.content, urlparse.netloc, urlparse.scheme)
-        response = make_response((content, tpr.status_code))
-        return response
+            tpr = requests.get(url, cookies=cookies, headers=headers)
+        except Exception as e:
+            abort(404, str(e)) # If failed return not found.
+            
+        # Change all links and resources to run through the proxy.
+        if 'image' in headers['content-type'].lower():
+            # Special handling of images due to the data not playing nice with pythons str() func.
+            content = tpr.content
+        else:
+            content = proxyHTML(tpr.content, urlparse.netloc, urlparse.scheme)
+        resp = make_response((content, tpr.status_code))
+        for cookie in tpr.cookies.keys():
+            resp.set_cookie(cookie, tpr.cookies[cookie])
     # elif request.method == 'HEAD':
     # 	user = request.form['nm']
     # 	return redirect(url_for('success',name = user))
-    # elif request.method == 'POST':
-    # 	user = request.form['nm']
-    # 	return redirect(url_for('success',name = user))
+    elif request.method == 'POST':
+    	try:
+            tpr = requests.post(url, data=request.data, cookies=cookies, headers=headers)
+        except Exception as e:
+            abort(404, str(e))
+        resp = make_response((tpr.content, tpr.status_code))
+        for cookie in tpr.cookies.keys():
+            resp.set_cookie(cookie, tpr.cookies[cookie])
     # elif request.method == 'PUT':
     # 	user = request.form['nm']
     # 	return redirect(url_for('success',name = user))
@@ -95,5 +102,6 @@ def api():
     # elif request.method == 'PATCH':
     # 	user = request.form['nm']
     # 	return redirect(url_for('success',name = user))
-    
-    
+    return resp
+
+
