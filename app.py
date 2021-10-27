@@ -3,6 +3,10 @@ from flask import Flask, render_template, request, flash, make_response, abort
 import requests
 import urllib.parse as urllib
 from bs4 import BeautifulSoup
+# Stop flash from spamming logs
+import logging
+log = logging.getLogger('werkzeug')
+log.setLevel(logging.ERROR)
 
 app = Flask(__name__)
 app.secret_key = "manbearpig_MUDMAN888"
@@ -73,7 +77,7 @@ def api():
                 raise KeyError
         except KeyError:
             content = proxyHTML(tpr.content, urlparse.netloc, urlparse.scheme)
-        resp = make_response((content, tpr.status_code))
+        resp = make_response((content, tpr.status_code, tpr.headers))
         for cookie in tpr.cookies.keys():
             resp.set_cookie(cookie, tpr.cookies[cookie])
     # elif request.method == 'HEAD':
