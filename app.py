@@ -65,10 +65,13 @@ def api():
             abort(404, str(e)) # If failed return not found.
             
         # Change all links and resources to run through the proxy.
-        if 'image' in headers['content-type'].lower():
-            # Special handling of images due to the data not playing nice with pythons str() func.
-            content = tpr.content
-        else:
+        try:
+            if 'image' in headers['content-type'].lower():
+                # Special handling of images due to the data not playing nice with pythons str() func.
+                content = tpr.content
+            else:
+                raise KeyError
+        except KeyError:
             content = proxyHTML(tpr.content, urlparse.netloc, urlparse.scheme)
         resp = make_response((content, tpr.status_code))
         for cookie in tpr.cookies.keys():
