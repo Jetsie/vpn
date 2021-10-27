@@ -61,6 +61,9 @@ def api():
     if headers['Host']:
         headers['Host'] = urlparse.netloc
 
+    if headers['X-Frame-Options']:
+        headers['X-Frame-Options'].pop()
+
     if request.method == 'GET':
         # Make request on behalf of client.
         try:
@@ -77,7 +80,7 @@ def api():
                 raise KeyError
         except KeyError:
             content = proxyHTML(tpr.content, urlparse.netloc, urlparse.scheme)
-        print(str(type(tpr.headers)), '->' , tpr.headers)
+        print(tpr.headers)
         resp = make_response((content, tpr.status_code, dict(tpr.headers)))
         
         for cookie in tpr.cookies.keys():
