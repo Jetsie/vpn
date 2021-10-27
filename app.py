@@ -77,7 +77,7 @@ def api():
     # 	user = request.form['nm']
     # 	return redirect(url_for('success',name = user))
     elif request.method == 'POST':
-    	try:
+        try:
             tpr = requests.post(url, data=request.data, cookies=cookies, headers=headers)
         except Exception as e:
             abort(404, str(e))
